@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "setup2poetry"
-version = "0.1.0"
+version = "0.1.1"
 description = "Tool to convert setup.py to poetry pyproject.toml"
 authors = ["Matt Magin <matt.magin@cmv.com.au>"]
 license = "MIT"

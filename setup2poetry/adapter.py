@@ -1,3 +1,5 @@
+from email import message_from_string
+
 import pkg_resources
 
 import toml
@@ -7,18 +9,17 @@ class PoetryAdapter:
     _deps = None
 
     def __init__(self, package):
-        self._package = pkg_resources.require(package)[0]
-        meta = dict(
-            self._package._pkg_info.items()  # pylint: disable=protected-access
-        )
+        self._package = pkg_resources.get_distribution(package)
+        raw_meta = self._package.get_metadata(self._package.PKG_INFO)
+        metadata = dict(message_from_string(raw_meta))
 
         self._toml_dict = {
             'tool.poetry': {
-                'name': meta['Name'],
-                'version': meta['Version'],
-                'description': meta['Summary'],
-                'authors': [meta['Author']],
-                'license': meta['License']
+                'name': metadata['Name'],
+                'version': metadata['Version'],
+                'description': metadata['Summary'],
+                'authors': [metadata['Author']],
+                'license': metadata['License']
             },
             'tool.poetry.dependencies': {
                 x: y for x, y in self._iter_deps(self._dependencies)
