@@ -7,11 +7,15 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.6"
+click = "^7.0"
+
+[tool.poetry.dev-dependencies]
 pre-commit = "^1.12"
 prospector = "^1.1"
 pytest = "^3.9"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.scripts]
+setup2poetry = 'setup2poetry.cli:main'
 
 [build-system]
 requires = ["poetry>=0.12"]

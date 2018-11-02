@@ -49,9 +49,12 @@ class PoetryAdapter:
         else:
             return self._package.requires()
     
-    def write(self, filepath):
+    def writepath(self, filepath):
         with open(filepath, "w") as f:
-            toml.dump(self._toml_dict, f)
+            self.write(f)
+    
+    def write(self, f):
+        toml.dump(self._toml_dict, f)
 
     def print(self):
         print(toml.dumps(self._toml_dict))
